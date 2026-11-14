@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information & Course Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header + Navigation -->
+    <header>
+        <div class="container">
+            <h1 class="logo">Student Course System</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-section="register">Register Student</a></li>
+                    <li><a href="#" class="nav-link" data-section="courses">Course Catalogue</a></li>
+                    <li><a href="#" class="nav-link" data-section="students">Student Records</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- MODULE 1: Home -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h2>Welcome to the Student Information and Course Management System</h2>
+                <p>
+                    This system lets you register students, browse courses, and search student records.
+                    It is built with HTML, CSS, and JavaScript only.
+                </p>
+                <div class="feature-cards">
+                    <div class="card">
+                        <h3>Student Registration</h3>
+                        <p>Enter student details with form validation and feedback.</p>
+                        <button class="btn" data-section="register">Go to Registration</button>
+                    </div>
+                    <div class="card">
+                        <h3>Course Catalogue</h3>
+                        <p>View and search at least five courses with filtering.</p>
+                        <button class="btn" data-section="courses">View Courses</button>
+                    </div>
+                    <div class="card">
+                        <h3>Student Records</h3>
+                        <p>Display, search, and manage registered student data.</p>
+                        <button class="btn" data-section="students">View Records</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 2: Registration Form -->
+        <section id="register" class="section">
+            <h2>Student Registration Form</h2>
+            <p class="section-desc">Please fill in all required fields. Invalid data will be rejected.</p>
+
+            <form id="studentForm" novalidate>
+                <div class="form-group">
+                    <label for="studentId">Student ID <span class="required">*</span></label>
+                    <input type="text" id="studentId" name="studentId" placeholder="e.g. S12345">
+                    <span class="error-message" id="idError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentName">Student Name <span class="required">*</span></label>
+                    <input type="text" id="studentName" name="studentName" placeholder="Full name">
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com">
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Other"> Other</label>
+                    </div>
+                    <span class="error-message" id="genderError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Course Selection <span class="required">*</span></label>
+                    <select id="course" name="course">
+                        <option value="">-- Select a course --</option>
+                        <option value="Web Programming">Web Programming</option>
+                        <option value="Database Systems">Database Systems</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Mobile App Development">Mobile App Development</option>
+                        <option value="Cybersecurity Fundamentals">Cybersecurity Fundamentals</option>
+                        <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+                    </select>
+                    <span class="error-message" id="courseError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Skills / Interests</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="skills" value="HTML/CSS"> HTML/CSS</label>
+                        <label><input type="checkbox" name="skills" value="JavaScript"> JavaScript</label>
+                        <label><input type="checkbox" name="skills" value="Python"> Python</label>
+                        <label><input type="checkbox" name="skills" value="Java"> Java</label>
+                        <label><input type="checkbox" name="skills" value="UI/UX Design"> UI/UX Design</label>
+                        <label><input type="checkbox" name="skills" value="Networking"> Networking</label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Registration</button>
+                    <button type="reset" class="btn btn-secondary">Reset Form</button>
+                </div>
+            </form>
+
+            <div id="formMessage" class="message"></div>
+        </section>
+
+        <!-- MODULE 3: Course Catalogue -->
+        <section id="courses" class="section">
+            <h2>Course Catalogue</h2>
+            <p class="section-desc">Browse available courses. Use the search box to filter by name, code, or description.</p>
+
+            <div class="search-box">
+                <input type="text" id="courseSearch" placeholder="Search courses by name, code or keyword...">
+                <button class="btn" id="clearCourseSearch">Clear</button>
+            </div>
+
+            <div id="courseList" class="course-grid"></div>
+            <p id="courseNoResults" class="no-results" style="display:none;">No courses match your search.</p>
+        </section>
+
+        <!-- MODULE 4: Student Records -->
+        <section id="students" class="section">
+            <h2>Student Records</h2>
+            <p class="section-desc">All registered students are listed below. Search by Student ID or Name.</p>
+
+            <div class="search-box">
+                <input type="text" id="studentSearch" placeholder="Search by ID or Name...">
+                <button class="btn" id="clearStudentSearch">Clear</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Course</th>
+                            <th>Skills</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody"></tbody>
+                </table>
+            </div>
+            <p id="studentNoResults" class="no-results" style="display:none;">No matching student records found.</p>
+            <p id="studentCount" class="record-count"></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Student Information and Course Management System &copy; 2026 | Web Programming Final Project</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
